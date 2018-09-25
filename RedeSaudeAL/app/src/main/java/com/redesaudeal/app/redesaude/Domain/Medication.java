@@ -1,0 +1,7 @@
+package com.redesaudeal.app.redesaude.Domain;
+
+public class Medication {
+    private String name;
+    private String bula;
+
+}
