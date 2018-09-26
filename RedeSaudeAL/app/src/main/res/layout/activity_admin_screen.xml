@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Apresentacao.adminScreen">
+
+    <TextView
+        android:id="@+id/adminScreenView"
+        android:layout_width="146dp"
+        android:layout_height="53dp"
+        android:layout_marginBottom="37dp"
+        android:layout_marginEnd="119dp"
+        android:layout_marginStart="119dp"
+        android:layout_marginTop="16dp"
+        android:text="Administrador"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/adminScreenButtonPerfil"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/adminScreenButtonPerfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="125dp"
+        android:layout_marginStart="125dp"
+        android:layout_marginTop="8dp"
+        android:text="Acessar perfil"
+        app:layout_constraintBottom_toTopOf="@+id/adminScreenButtonFamily"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adminScreenView" />
+
+    <Button
+        android:id="@+id/healthAgentScreenButtonAssitedPerson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="7dp"
+        android:layout_marginEnd="104dp"
+        android:layout_marginStart="104dp"
+        android:text="Cadastrar invididuo"
+        app:layout_constraintBottom_toTopOf="@+id/adminScreenButtonPerfil"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adminScreenView" />
+
+
+    <Button
+        android:id="@+id/adminScreenButtonFamily"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="110dp"
+        android:layout_marginStart="111dp"
+        android:text="Cadastrar Familia"
+        app:layout_constraintBottom_toTopOf="@+id/adminScreenButtonAgent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adminScreenButtonPerfil" />
+
+    <Button
+        android:id="@+id/adminScreenButtonAgent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="111dp"
+        android:layout_marginStart="111dp"
+        android:layout_marginTop="9dp"
+        android:text="Cadastrar Agente"
+        app:layout_constraintBottom_toTopOf="@+id/adminScreenButtonAdmin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adminScreenButtonFamily" />
+
+    <Button
+        android:id="@+id/adminScreenButtonAdmin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="122dp"
+        android:layout_marginStart="123dp"
+        android:layout_marginTop="10dp"
+        android:text="Cadastrar ADM"
+        app:layout_constraintBottom_toTopOf="@+id/adminScreenButtonPsf"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adminScreenButtonAgent" />
+
+    <Button
+        android:id="@+id/adminScreenButtonPsf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginEnd="125dp"
+        android:layout_marginStart="126dp"
+        android:text="Cadastrar PSF"
+        app:layout_constraintBottom_toTopOf="@+id/adminScreenButtonCampain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adminScreenButtonAdmin" />
+
+    <Button
+        android:id="@+id/adminScreenButtonCampain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="109dp"
+        android:layout_marginStart="110dp"
+        android:text="Iniciar Camapanha"
+        app:layout_constraintBottom_toTopOf="@+id/adminScreenButtonExit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adminScreenButtonPsf" />
+
+    <Button
+        android:id="@+id/adminScreenButtonExit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="149dp"
+        android:layout_marginStart="147dp"
+        android:text="Sair"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adminScreenButtonCampain" />
+</android.support.constraint.ConstraintLayout>
