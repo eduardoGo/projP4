@@ -47,7 +47,7 @@ public class adminScreen extends AppCompatActivity {
         adminScreenButtonFamily.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(this, registerFamily.class);
+                Intent i = new Intent(this, registerFamilyScreen.class);
             }
         });
 
@@ -93,7 +93,7 @@ public class adminScreen extends AppCompatActivity {
         adminScreenButtonAssistedPerson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(this, registerAssistedPerson.class);
+                Intent i = new Intent(this, registerAssistedPersonScreen.class);
             }
         });
 
