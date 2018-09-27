@@ -1,10 +1,13 @@
-package com.redesaudeexample.redesaude.Apresentacao;
+package com.redesaudeal.app.redesaude.Apresentacao;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
+
+import com.redesaudeal.app.redesaude.PerfilScreen;
+import com.redesaudeal.app.redesaude.R;
 
 public class adminScreen extends AppCompatActivity {
 
@@ -32,6 +35,7 @@ public class adminScreen extends AppCompatActivity {
         adminScreenButtonCampain = (Button) findViewById(R.id.adminScreenButtonCampain);
         adminScreenButtonAssistedPerson = (Button) findViewById(R.id.adminScreenButtonAssitedPerson);
 
+
         eventClick();
     }
 
@@ -41,27 +45,30 @@ public class adminScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(adminScreen.this, PerfilScreen.class);
+                startActivity(i);
             }
         });
 
         adminScreenButtonFamily.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(this, registerFamilyScreen.class);
+                Intent i = new Intent(adminScreen.this, registerFamilyScreen.class);
+                startActivity(i);
             }
         });
 
         adminScreenButtonAgent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(this, registerAgent.class);
+                Intent i = new Intent(adminScreen.this, registerAgentScreen.class);
+                startActivity(i);
             }
         });
 
         adminScreenButtonAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(this, registerAdmin.class);
+
             }
         });
 
@@ -69,7 +76,7 @@ public class adminScreen extends AppCompatActivity {
         adminScreenButtonPsf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(this, registerPsf.class);
+                //Intent i = new Intent(this, registerPsf.class);
             }
         });
 
@@ -77,7 +84,7 @@ public class adminScreen extends AppCompatActivity {
         adminScreenButtonExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Connect.getAuth().logOut();
+                //Connect.getAuth().logOut();
                 finish();
             }
         });
@@ -86,14 +93,14 @@ public class adminScreen extends AppCompatActivity {
         adminScreenButtonCampain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(this, registerCampain.class);
+                //Intent i = new Intent(this, registerCampain.class);
             }
         });
 
         adminScreenButtonAssistedPerson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(this, registerAssistedPersonScreen.class);
+                Intent i = new Intent(adminScreen.this, registerAssistedPersonScreen.class);
             }
         });
 

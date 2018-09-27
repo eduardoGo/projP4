@@ -1,10 +1,12 @@
-package com.redesaudeexample.redesaude.Apresentacao;
+package com.redesaudeal.app.redesaude.Apresentacao;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.redesaudeal.app.redesaude.R;
 
 public class registerAgentScreen extends AppCompatActivity {
 
@@ -22,8 +24,8 @@ public class registerAgentScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_agent_screen);
 
-        registerAgentScreenExit = (Button) findViewById(R.id.registerAgentScreenExit);
-        registerAgentScreenRegister = (Button) findViewById(R.id.registerAgentScreenRegister);
+        registerAgentScreenExit = (Button) findViewById(R.id.registerAgentScreenButtonBack);
+        registerAgentScreenRegister = (Button) findViewById(R.id.registerAgentScreenButtonRegister);
         registerAgentScreenDate = (EditText) findViewById(R.id.registerAgentScreenDate);
         registerAgentScreenCpf = (EditText) findViewById(R.id.registerAgentScreenCpf);
         registerAgentScreenPasswd = (EditText) findViewById(R.id.registerAgentScreenPasswd);
@@ -38,9 +40,12 @@ public class registerAgentScreen extends AppCompatActivity {
         registerAgentScreenRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                /*
                 registerAgent(registerAgentScreenName.getText().toString(),
                         registerAgentScreenCpf.getText().toString(),registerAgentScreenPasswd.getText(),
                         registerAgentScreenDate.getText(), registerAgentScreenLogin.getText());
+                */
                 finish();
             }
         });

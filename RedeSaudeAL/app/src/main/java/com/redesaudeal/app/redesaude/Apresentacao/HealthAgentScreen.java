@@ -1,10 +1,13 @@
-package com.redesaudeexample.redesaude.Apresentacao;
+package com.redesaudeal.app.redesaude.Apresentacao;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.redesaudeal.app.redesaude.Domain.HealthAgent;
+import com.redesaudeal.app.redesaude.R;
 
 public class HealthAgentScreen extends AppCompatActivity {
 
@@ -18,7 +21,8 @@ public class HealthAgentScreen extends AppCompatActivity {
         setContentView(R.layout.activity_health_agent_screen);
 
         healthAgentScreenButtonFamily = (Button) findViewById(R.id.healthAgentScreenButtonFamily);
-        healthAgentScreenButtonAssitedPerson = (Button) findViewById(R.id.healthAgentScreenButtonAssistedPerson);
+        healthAgentScreenButtonAssitedPerson =
+                (Button) findViewById(R.id.healthAgentScreenButtonAssitedPerson);
         healthAgentScreenButtonExit = (Button) findViewById(R.id.healthAgentScreenButtonExit);
 
         eventClick();
@@ -30,14 +34,16 @@ public class HealthAgentScreen extends AppCompatActivity {
         healthAgentScreenButtonFamily.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(this, registerFamily.class);
+                Intent i = new Intent(HealthAgentScreen.this, registerFamilyScreen.class);
+                startActivity(i);
             }
         });
 
         healthAgentScreenButtonAssitedPerson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(this, registerAssistedPerson.class);
+                Intent i = new Intent(HealthAgentScreen.this, registerAssistedPersonScreen.class);
+                startActivity(i);
             }
         });
 
@@ -45,7 +51,7 @@ public class HealthAgentScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Connect.getAuth().logOut();
+                //Connect.getAuth().logOut();
                 finish();
             }
         });
