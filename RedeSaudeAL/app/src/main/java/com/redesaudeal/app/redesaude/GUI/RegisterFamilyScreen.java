@@ -36,9 +36,10 @@ public class RegisterFamilyScreen extends AppCompatActivity {
         cancelRegister = (Button) findViewById(R.id.registerFamilyScreenExit);
         usersCurrentRegistered = (ListView) findViewById(R.id.registerFamilyScreenList);
 
-        newFamily = new Family();
 
-         //registra newFamily no realtime e pega o UID
+        Intent i = getIntent();
+        Bundle bundle = i.getExtras();
+        uidFamily = bundle.getString("uid");
 
 
         eventClick();

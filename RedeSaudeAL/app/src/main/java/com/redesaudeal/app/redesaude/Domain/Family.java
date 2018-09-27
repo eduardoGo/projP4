@@ -4,11 +4,9 @@ import java.util.ArrayList;
 
 public class Family extends Loggable {
 
-    private ArrayList<AssistedPerson> components;
+    private ArrayList<AssistedPerson> components =  new ArrayList<>();
+    private Address address;
 
-    public void setComponents(ArrayList<AssistedPerson> components) {
-        this.components = components;
-    }
 
     public void addComponent(AssistedPerson assistedPerson){
         this.components.add(assistedPerson);
@@ -19,8 +17,11 @@ public class Family extends Loggable {
         return components;
     }
 
-    public Family(){
+    public Family(String login, String password, Address address){
         super.setType("family");
+        super.setLogin(login);
+        super.setPassword(password);
+        this.address = address;
     }
 
 }

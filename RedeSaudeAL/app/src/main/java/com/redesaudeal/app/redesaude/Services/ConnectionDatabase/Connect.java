@@ -15,6 +15,7 @@ public class Connect {
     private static FirebaseUser firebaseUser;
     private static DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("Database");
     private static DatabaseReference users = database.child("Users");
+    private static DatabaseReference families = users.child("Families");
 
     public static ConnectionLoggable getConnectionLoggable(){
         return ConnectionFirebaseLoggable.getInstance();

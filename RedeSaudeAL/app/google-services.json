@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "341345288118-f1a32pa5j95vajg6b4sgo8lf5u5nqum4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.redesaudeal.app.redesaude",
+            "certificate_hash": "cb52f7fe3120b2d95372c7b561b10596affbe5a6"
+          }
+        },
+        {
           "client_id": "341345288118-8od2p4ruklnsk4o4ub94f921c0dhgb3n.apps.googleusercontent.com",
           "client_type": 3
         }
