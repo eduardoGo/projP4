@@ -15,12 +15,17 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.redesaudeal.app.redesaude.Domain.Admin;
 import com.redesaudeal.app.redesaude.Domain.Family;
 import com.redesaudeal.app.redesaude.Domain.HealthAgent;
 import com.redesaudeal.app.redesaude.Domain.Loggable;
 import com.redesaudeal.app.redesaude.R;
 import com.redesaudeal.app.redesaude.Services.ConnectionDatabase.Connect;
+
+import java.net.ConnectException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,11 +45,6 @@ public class MainActivity extends AppCompatActivity {
         getUIElemts();
 
         defineOnClickListeners();
-
-        connection = new Connect();
-
-        loggable = null;
-
 
     }
 
@@ -79,17 +79,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void login(){
 
-        final FirebaseAuth auth = connection.getNewAuth();
+        FirebaseAuth auth = Connect.getAuth();
 
-        auth.signInWithEmailAndPassword(mEmail.getText().toString() + "gmail.com", mPasswd.getText().toString())
+        auth.signInWithEmailAndPassword(mEmail.getText().toString() + "@gmail.com", mPasswd.getText().toString())
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             alert("Usuário logado com sucesso");
-
-                            nextScreen(auth);
-
+                            nextScreen();
                         }else{
                             alert("Autenticação falhou");
                         }
@@ -98,52 +96,68 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void nextScreen(FirebaseAuth auth) {
+    private void nextScreen() {
 
-        takeLoggable(auth);
-
-        Intent i = null;
-
-        if(loggable.getType().equals("health_agent"))
-            i = new Intent(getApplicationContext(), HealthAgentScreen.class);
-        //else if(loggable.getType().equals("family"))
-            //   i = new Intent(getApplicationContext(), FamilyScreen.class);
-        else if(loggable.getType().equals("admin"))
-            i = new Intent(getApplicationContext(), AdminScreen.class);
-
-
-        Bundle bundle = new Bundle();
-
-        bundle.putString("uid", loggable.getId());
-
-        i.putExtras(bundle);
-
-        startActivity(i);
-
-
-    }
-
-    private void takeLoggable(FirebaseAuth auth) {
-
-        Connect.getUsers().child(auth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+        DatabaseReference node = Connect.getNodeLoggable().child(Connect.getCurrentUserUID());
+        alert(Connect.getCurrentUserLogin());
+        node.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                loggable = dataSnapshot.getValue(Loggable.class);
-
+                Loggable admin = dataSnapshot.getValue(Admin.class);
+                if(admin != null){
+                    Intent i = new Intent(getApplicationContext(), PerfilScreen.class);
+                    i.putExtra("loggable", admin);
+                    startActivity(i);
+                }else{
+                    alert("Loggable is null");
+                }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                alert("Não foi possível acessar o banco de dados");
+                return;
             }
         });
 
+            /*Connect.getNodeLoggable().child(Connect.getCurrentUserUID()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    Loggable loggable = dataSnapshot.getValue(Admin.class);
+
+                    if(loggable != null) {
+                        Intent i = null;
+
+                        if (loggable.getType().equals("health_agent"))
+                            i = new Intent(getApplicationContext(), HealthAgentScreen.class);
+                            //else if(loggable.getType().equals("family"))
+                            //   i = new Intent(getAppliegscationContext(), FamilyScreen.class);
+                        else if (loggable.getType().equals("admin"))
+                            i = new Intent(getApplicationContext(), AdminScreen.class);
+
+
+                        Bundle bundle = new Bundle();
+
+                        bundle.putString("uid", loggable.getId());
+
+                        i.putExtras(bundle);
+
+                        startActivity(i);
+                    }else
+                        alert("Loggable is NULL");
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });*/
+
     }
 
-
     private void alert(String string){
-        Toast.makeText(this,string, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,string, Toast.LENGTH_LONG).show();
     }
 
 }

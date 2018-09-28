@@ -24,9 +24,9 @@ public class CreatorFirebaseLoggable {
         Connect connect  = new Connect();
 
         successful = true;
-        FirebaseAuth authCurrent = connect.getNewAuth();
+        FirebaseAuth authCurrent = Connect.getAuth();
 
-        authCurrent.createUserWithEmailAndPassword(loggable.getLogin()+"gmail.com", loggable.getPassword())
+        authCurrent.createUserWithEmailAndPassword(loggable.getLogin()+"@gmail.com", loggable.getPassword())
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -42,7 +42,7 @@ public class CreatorFirebaseLoggable {
 
             loggable.setId(authCurrent.getCurrentUser().getUid());
 
-            Connect.getUsers().child(loggable.getId()).setValue(loggable);
+            Connect.getNodeLoggable().child(loggable.getId()).setValue(loggable);
 
         }
         return authCurrent;

@@ -1,6 +1,8 @@
 package com.redesaudeal.app.redesaude.Domain;
 
-public abstract class Loggable {
+import java.io.Serializable;
+
+public abstract class Loggable  implements Serializable{
 
     private String id;
     private String name;

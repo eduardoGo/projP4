@@ -2,6 +2,7 @@ package com.redesaudeal.app.redesaude.GUI;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -9,11 +10,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.redesaudeal.app.redesaude.Domain.Admin;
 import com.redesaudeal.app.redesaude.Domain.Loggable;
 import com.redesaudeal.app.redesaude.R;
+import com.redesaudeal.app.redesaude.Services.ConnectionDatabase.Connect;
 import com.redesaudeal.app.redesaude.Services.ConnectionDatabase.CreatorFirebaseLoggable;
+
+import java.io.Serializable;
 
 public class RegisterScreen extends AppCompatActivity {
 
@@ -24,6 +31,8 @@ public class RegisterScreen extends AppCompatActivity {
     private Button register;
     private Button backLogin;
     private TextView viewText;
+
+    Loggable loggable;
 
 
     @Override
@@ -65,21 +74,33 @@ public class RegisterScreen extends AppCompatActivity {
 
     protected void registerUser(){
 
-        String nameAux = nameText.getText().toString().trim();
-        String emailAux = emailText.getText().toString().trim();
-        String passwdAux = passwdText.getText().toString().trim();
+        loggable = new Admin();
+
+        loggable.setName(nameText.getText().toString().trim());
+        loggable.setLogin(emailText.getText().toString().trim());
+        loggable.setPassword( passwdText.getText().toString().trim() );
         int ageAux = Integer.valueOf(ageText.getText().toString());
 
-        Loggable admin = new Admin();
+        Connect.getAuth().createUserWithEmailAndPassword(loggable.getLogin()+"@gmail.com", loggable.getPassword())
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            loggable.setId(Connect.getCurrentUserUID());
+                            Connect.getNodeLoggable().child(Connect.getCurrentUserUID()).setValue(loggable);
 
-        admin.setName(nameAux);
-        admin.setLogin(emailAux);
-        admin.setPassword(passwdAux);
+                            Intent i = new Intent(RegisterScreen.this, PerfilScreen.class);
+                            i.putExtra("loggable", loggable);
 
-        final int age = ageAux;
+                            startActivity(i);
+                            finish();
 
+                        }else{
+                            alert("Fail");
+                        }
 
-
+                    }
+                });
 
         /*
 
@@ -93,28 +114,6 @@ public class RegisterScreen extends AppCompatActivity {
             finish();
         }
         */
-
-
-        FirebaseAuth authCurrent = CreatorFirebaseLoggable.createLoggable(admin);
-
-        if(authCurrent.getCurrentUser() != null){
-
-            Intent i = new Intent(RegisterScreen.this, PerfilScreen.class);
-
-            Bundle bundle = new Bundle();
-
-            bundle.putString("uid", authCurrent.getCurrentUser().getUid());
-
-            i.putExtras(bundle);
-
-            startActivity(i);
-
-            finish();
-        }else
-            alert("Erro, tente novamente");
-
-
-
 
     }
 
