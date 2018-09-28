@@ -8,13 +8,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.redesaudeal.app.redesaude.Domain.Address;
 import com.redesaudeal.app.redesaude.Domain.Family;
 import com.redesaudeal.app.redesaude.R;
-import com.redesaudeal.app.redesaude.Services.ConnectionDatabase.Connect;
-import com.redesaudeal.app.redesaude.Services.ConnectionDatabase.Connection;
 import com.redesaudeal.app.redesaude.Services.ConnectionDatabase.CreatorFirebaseLoggable;
-import com.redesaudeal.app.redesaude.Services.CreatorLoggable;
 
 public class RegisterFamilyScreen1 extends AppCompatActivity {
 
@@ -27,6 +25,14 @@ public class RegisterFamilyScreen1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_family_screen1);
 
+        instantiateScreen();
+
+        clickEvent();
+
+
+    }
+    protected void instantiateScreen(){
+
         login = (EditText) findViewById(R.id.registerFamilyScreen1Login);
         passwd1 = (EditText) findViewById(R.id.registerFamilyScreen1Passwd1);
         passwd2 = (EditText) findViewById(R.id.registerFamilyScreen1Passwd2);
@@ -38,12 +44,10 @@ public class RegisterFamilyScreen1 extends AppCompatActivity {
         cancel = (Button) findViewById(R.id.registerFamilyScreen1ButtonExit);
 
 
-        clickEvent();
-
-
     }
 
-    private void clickEvent() {
+    protected void clickEvent() {
+
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,23 +58,27 @@ public class RegisterFamilyScreen1 extends AppCompatActivity {
         nextScreen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Boolean equalsPasswd = checkPasswd(passwd1.getText().toString(),passwd1.getText().toString());
+
                 if(equalsPasswd) {
+
                     Family family = createFamily();
-                    CreatorLoggable conn = Connection.getInstance().getCreatorLoggable();
-                    if(conn.createLoggable(RegisterFamilyScreen1.this, family)){
+
+                    FirebaseAuth authCurrent = CreatorFirebaseLoggable.createLoggable(family);
+
+                    if(authCurrent.getCurrentUser() != null){
+
                         Intent i = new Intent(RegisterFamilyScreen1.this, RegisterFamilyScreen.class);
 
                         Bundle bundle = new Bundle();
-                        Connect.getAuth().getCurrentUser().getUid();
 
-                        bundle.putString("uid", Connect.getAuth().getCurrentUser().getUid());
+                        bundle.putString("uid", authCurrent.getCurrentUser().getUid());
 
                         i.putExtras(bundle);
 
-
-
                         startActivity(i);
+
                         finish();
                     }else
                         alert("Erro, tente novamente");

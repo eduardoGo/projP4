@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.redesaudeal.app.redesaude.R;
+
 public class HealthAgentScreen extends AppCompatActivity {
 
     private Button healthAgentScreenButtonFamily;
