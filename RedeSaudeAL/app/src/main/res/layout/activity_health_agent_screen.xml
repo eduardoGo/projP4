@@ -27,39 +27,38 @@
         android:id="@+id/healthAgentScreenButtonFamily"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="110dp"
         android:layout_marginStart="111dp"
         android:layout_marginTop="38dp"
+        android:layout_marginEnd="110dp"
         android:text="Cadastrar Familia"
-        app:layout_constraintBottom_toTopOf="@+id/healthAgentScreenButtonAssitedPerson"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/HealthAgentScreenView" />
 
     <Button
-        android:id="@+id/healthAgentScreenButtonAssitedPerson"
+        android:id="@+id/healthAgentScreenButtonExams"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="104dp"
-        android:layout_marginStart="104dp"
-        android:text="Cadastrar invididuo"
+        android:layout_marginStart="111dp"
+        android:layout_marginTop="108dp"
+        android:layout_marginEnd="110dp"
+        android:layout_marginBottom="182dp"
+        android:text="Ver exames"
         app:layout_constraintBottom_toTopOf="@+id/healthAgentScreenButtonExit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/healthAgentScreenButtonFamily" />
+        app:layout_constraintTop_toBottomOf="@+id/HealthAgentScreenView" />
 
     <Button
         android:id="@+id/healthAgentScreenButtonExit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
-        android:layout_marginEnd="148dp"
         android:layout_marginStart="148dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginEnd="148dp"
+        android:layout_marginBottom="60dp"
         android:text="Sair"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/healthAgentScreenButtonAssitedPerson" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

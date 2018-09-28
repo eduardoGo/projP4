@@ -24,6 +24,7 @@
         <activity android:name=".GUI.RegisterFamilyScreen" />
         <activity android:name=".GUI.HealthAgentScreen" />
         <activity android:name=".GUI.PerfilScreen" />
+        <activity android:name=".GUI.ExamsScreen"></activity>
     </application>
 
 </manifest>

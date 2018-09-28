@@ -2,6 +2,8 @@ package com.redesaudeal.app.redesaude.Services.ConnectionDatabase;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -21,11 +23,8 @@ public class CreatorFirebaseLoggable {
 
     public static FirebaseAuth createLoggable(Loggable loggable) {
 
-        Connect connect  = new Connect();
-
-        successful = true;
+        successful = false;
         FirebaseAuth authCurrent = Connect.getAuth();
-
         authCurrent.createUserWithEmailAndPassword(loggable.getLogin()+"@gmail.com", loggable.getPassword())
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -42,10 +41,16 @@ public class CreatorFirebaseLoggable {
 
             loggable.setId(authCurrent.getCurrentUser().getUid());
 
-            Connect.getNodeLoggable().child(loggable.getId()).setValue(loggable);
+            Connect.getUsers().child(loggable.getId()).setValue(loggable);
 
         }
+
         return authCurrent;
     }
+
+    private static void alert(String string){
+
+    }
+
 
 }

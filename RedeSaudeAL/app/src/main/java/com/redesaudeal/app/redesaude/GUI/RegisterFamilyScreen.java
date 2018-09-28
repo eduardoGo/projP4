@@ -46,6 +46,7 @@ public class RegisterFamilyScreen extends AppCompatActivity {
     }
 
     private void eventClick(){
+
         registerAssistedPerson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

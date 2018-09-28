@@ -20,8 +20,6 @@ import com.redesaudeal.app.redesaude.R;
 import com.redesaudeal.app.redesaude.Services.ConnectionDatabase.Connect;
 import com.redesaudeal.app.redesaude.Services.ConnectionDatabase.CreatorFirebaseLoggable;
 
-import java.io.Serializable;
-
 public class RegisterScreen extends AppCompatActivity {
 
     private EditText nameText;
@@ -32,7 +30,8 @@ public class RegisterScreen extends AppCompatActivity {
     private Button backLogin;
     private TextView viewText;
 
-    Loggable loggable;
+    private boolean successful;
+
 
 
     @Override
@@ -74,33 +73,21 @@ public class RegisterScreen extends AppCompatActivity {
 
     protected void registerUser(){
 
-        loggable = new Admin();
-
-        loggable.setName(nameText.getText().toString().trim());
-        loggable.setLogin(emailText.getText().toString().trim());
-        loggable.setPassword( passwdText.getText().toString().trim() );
+        String nameAux = nameText.getText().toString().trim();
+        String emailAux = emailText.getText().toString().trim();
+        String passwdAux = passwdText.getText().toString().trim();
         int ageAux = Integer.valueOf(ageText.getText().toString());
 
-        Connect.getAuth().createUserWithEmailAndPassword(loggable.getLogin()+"@gmail.com", loggable.getPassword())
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            loggable.setId(Connect.getCurrentUserUID());
-                            Connect.getNodeLoggable().child(Connect.getCurrentUserUID()).setValue(loggable);
+        Loggable admin = new Admin();
 
-                            Intent i = new Intent(RegisterScreen.this, PerfilScreen.class);
-                            i.putExtra("loggable", loggable);
+        admin.setName(nameAux);
+        admin.setLogin(emailAux);
+        admin.setPassword(passwdAux);
 
-                            startActivity(i);
-                            finish();
+        final int age = ageAux;
 
-                        }else{
-                            alert("Fail");
-                        }
 
-                    }
-                });
+
 
         /*
 
@@ -114,6 +101,53 @@ public class RegisterScreen extends AppCompatActivity {
             finish();
         }
         */
+
+        successful = false;
+        FirebaseAuth authCurrent = Connect.getAuth();
+        authCurrent.createUserWithEmailAndPassword(admin.getLogin()+"@gmail.com", admin.getPassword())
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            successful = true;
+                        }else
+                            successful = false;
+                    }
+                });
+
+
+        if(successful) {
+
+            admin.setId(authCurrent.getCurrentUser().getUid());
+
+            Connect.getUsers().child(admin.getId()).setValue(admin);
+
+        }
+
+
+
+
+
+        if(authCurrent.getCurrentUser() != null){
+
+            Intent i = new Intent(RegisterScreen.this, PerfilScreen.class);
+
+            Bundle bundle = new Bundle();
+
+            bundle.putString("uid", authCurrent.getCurrentUser().getUid());
+
+            i.putExtras(bundle);
+
+            startActivity(i);
+
+            finish();
+        }else {
+            alert("Passwd" + passwdAux);
+            alert("Email: " + emailAux);
+
+        }
+
+
 
     }
 
