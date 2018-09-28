@@ -1,20 +1,19 @@
-package com.redesaudeal.app.redesaude;
+package com.redesaudeal.app.redesaude.GUI;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseUser;
+import com.redesaudeal.app.redesaude.Domain.Admin;
+import com.redesaudeal.app.redesaude.Domain.Loggable;
+import com.redesaudeal.app.redesaude.R;
+import com.redesaudeal.app.redesaude.Services.ConnectionDatabase.Connection;
+import com.redesaudeal.app.redesaude.Services.CreatorLoggable;
 
 public class RegisterScreen extends AppCompatActivity {
 
@@ -60,8 +59,6 @@ public class RegisterScreen extends AppCompatActivity {
             }
         });
 
-
-
     }
 
 
@@ -73,59 +70,24 @@ public class RegisterScreen extends AppCompatActivity {
         String passwdAux = passwdText.getText().toString().trim();
         int ageAux = Integer.valueOf(ageText.getText().toString());
 
-        final String name = nameAux;
-
-        final String email = emailAux;
-
-        final String passwd = passwdAux;
+        Loggable admin = new Admin();
+        admin.setName(nameAux);
+        admin.setLogin(emailAux);
+        admin.setPassword(passwdAux);
 
         final int age = ageAux;
-        //alert("Iniciar o mAuth");
 
-        Connect.getAuth().createUserWithEmailAndPassword(email + "@gmail.com", passwd)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+        Connection con = Connection.getInstance();
+        CreatorLoggable creatorLog = con.getCreatorLoggable();
 
-
-
-                        if(task.isSuccessful()){
-
-                            alert("Usuário criado com sucesso");
-                            teste(name,email,passwd,age);
-
-                        }
-                        else{
-                            // If sign in fails, display a message to the user.
-                            Log.w("oi", "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(RegisterScreen.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            //alert("Erro, tente novamente ");
-                        }
-
-                    }
-                });
-
-        //alert("...");
-
-        return;
-
+        boolean successful = creatorLog.createLoggable(this, admin);
+        if(successful) {
+            Intent i = new Intent(RegisterScreen.this, PerfilScreen.class);
+            startActivity(i);
+            finish();
+        }
 
     }
-
-    private void teste(String name, String email, String passwd, int age){
-
-        FirebaseUser user = Connect.getAuth().getCurrentUser();
-        User newUser = new User(user.getUid(),name,age,email,passwd);
-        Connect.getUsers().child(user.getUid()).setValue(newUser);
-
-        Intent i = new Intent(RegisterScreen.this, PerfilScreen.class);
-        startActivity(i);
-        finish();
-
-    }
-
-
 
     @Override
     protected void onStart() {

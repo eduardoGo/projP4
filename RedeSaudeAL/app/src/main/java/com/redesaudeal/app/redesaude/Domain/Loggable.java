@@ -7,6 +7,8 @@ public abstract class Loggable {
     private String login;
     private String password;
 
+    private String type;
+
     public String getId() {
         return id;
     }
@@ -37,6 +39,14 @@ public abstract class Loggable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return this.type;
     }
 }
 

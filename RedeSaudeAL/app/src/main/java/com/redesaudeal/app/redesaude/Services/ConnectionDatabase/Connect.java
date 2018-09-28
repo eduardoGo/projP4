@@ -1,4 +1,4 @@
-package com.redesaudeal.app.redesaude;
+package com.redesaudeal.app.redesaude.Services.ConnectionDatabase;
 
 import android.support.annotation.NonNull;
 
@@ -6,6 +6,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.redesaudeal.app.redesaude.Services.ConnectionLoggable;
 
 public class Connect {
 
@@ -14,6 +15,10 @@ public class Connect {
     private static FirebaseUser firebaseUser;
     private static DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("Database");
     private static DatabaseReference users = database.child("Users");
+
+    public static ConnectionLoggable getConnectionLoggable(){
+        return ConnectionFirebaseLoggable.getInstance();
+    }
 
     public Connect(){
 

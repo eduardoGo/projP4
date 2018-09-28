@@ -1,13 +1,10 @@
-package com.redesaudeal.app.redesaude.Apresentacao;
+package com.redesaudeal.app.redesaude.GUI;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
-import com.redesaudeal.app.redesaude.Domain.HealthAgent;
-import com.redesaudeal.app.redesaude.R;
 
 public class HealthAgentScreen extends AppCompatActivity {
 
@@ -34,7 +31,7 @@ public class HealthAgentScreen extends AppCompatActivity {
         healthAgentScreenButtonFamily.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(HealthAgentScreen.this, registerFamilyScreen.class);
+                Intent i = new Intent(HealthAgentScreen.this, RegisterFamilyScreen.class);
                 startActivity(i);
             }
         });
@@ -42,7 +39,7 @@ public class HealthAgentScreen extends AppCompatActivity {
         healthAgentScreenButtonAssitedPerson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(HealthAgentScreen.this, registerAssistedPersonScreen.class);
+                Intent i = new Intent(HealthAgentScreen.this, RegisterAssistedPersonScreen.class);
                 startActivity(i);
             }
         });

@@ -1,9 +1,11 @@
-package com.redesaudeexample.redesaude.Apresentacao;
+package com.redesaudeal.app.redesaude.GUI;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class registerFamily extends AppCompatActivity {
+import com.redesaudeal.app.redesaude.R;
+
+public class RegisterFamily extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

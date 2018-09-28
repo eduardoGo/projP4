@@ -1,4 +1,4 @@
-package com.redesaudeal.app.redesaude.Apresentacao;
+package com.redesaudeal.app.redesaude.GUI;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,7 +8,7 @@ import android.widget.EditText;
 
 import com.redesaudeal.app.redesaude.R;
 
-public class registerAgentScreen extends AppCompatActivity {
+public class RegisterAgentScreen extends AppCompatActivity {
 
     private EditText registerAgentScreenName;
     private EditText registerAgentScreenLogin;

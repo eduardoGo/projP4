@@ -1,4 +1,4 @@
-package com.redesaudeal.app.redesaude.Apresentacao;
+package com.redesaudeal.app.redesaude.GUI;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,12 +10,11 @@ import android.widget.ListView;
 
 import com.redesaudeal.app.redesaude.Domain.AssistedPerson;
 import com.redesaudeal.app.redesaude.Domain.Family;
-import com.redesaudeal.app.redesaude.Domain.User;
 import com.redesaudeal.app.redesaude.R;
 
 import java.util.ArrayList;
 
-public class registerFamilyScreen extends AppCompatActivity {
+public class RegisterFamilyScreen extends AppCompatActivity {
 
     private Button registerAssistedPerson;
     private Button finishRegister;
@@ -50,8 +49,8 @@ public class registerFamilyScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent i = new Intent(registerFamilyScreen.this,
-                        registerAssistedPersonScreen.class);
+                Intent i = new Intent(RegisterFamilyScreen.this,
+                        RegisterAssistedPersonScreen.class);
 
 
                 Bundle bundle = new Bundle();
@@ -87,5 +86,9 @@ public class registerFamilyScreen extends AppCompatActivity {
         return new ArrayAdapter<AssistedPerson>(this,android.R.layout.simple_dropdown_item_1line,
                 usersInFamily);
 
+    }
+
+    private Family takeFamily(String uidFamily) {
+        return null;
     }
 }

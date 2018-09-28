@@ -10,9 +10,17 @@ public class Family extends Loggable {
         this.components = components;
     }
 
+    public void addComponent(AssistedPerson assistedPerson){
+        this.components.add(assistedPerson);
+    }
+
     public ArrayList<AssistedPerson> getComponents() {
 
         return components;
+    }
+
+    public Family(){
+        super.setType("family");
     }
 
 }

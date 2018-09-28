@@ -1,6 +1,6 @@
 package com.redesaudeal.app.redesaude.Domain;
 
-public class Addres {
+public class Address {
 
     private String state;
     private String city;

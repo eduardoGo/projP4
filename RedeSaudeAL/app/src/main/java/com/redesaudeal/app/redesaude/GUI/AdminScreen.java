@@ -1,4 +1,4 @@
-package com.redesaudeal.app.redesaude.Apresentacao;
+package com.redesaudeal.app.redesaude.GUI;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,10 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 
-import com.redesaudeal.app.redesaude.PerfilScreen;
-import com.redesaudeal.app.redesaude.R;
-
-public class adminScreen extends AppCompatActivity {
+public class AdminScreen extends AppCompatActivity {
 
 
     private Button adminScreenButtonPerfil;
@@ -44,7 +41,7 @@ public class adminScreen extends AppCompatActivity {
         adminScreenButtonPerfil.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(adminScreen.this, PerfilScreen.class);
+                Intent i = new Intent(AdminScreen.this, PerfilScreen.class);
                 startActivity(i);
             }
         });
@@ -52,7 +49,7 @@ public class adminScreen extends AppCompatActivity {
         adminScreenButtonFamily.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(adminScreen.this, registerFamilyScreen.class);
+                Intent i = new Intent(AdminScreen.this, RegisterFamilyScreen.class);
                 startActivity(i);
             }
         });
@@ -60,7 +57,7 @@ public class adminScreen extends AppCompatActivity {
         adminScreenButtonAgent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(adminScreen.this, registerAgentScreen.class);
+                Intent i = new Intent(AdminScreen.this, RegisterAgentScreen.class);
                 startActivity(i);
             }
         });
@@ -100,7 +97,7 @@ public class adminScreen extends AppCompatActivity {
         adminScreenButtonAssistedPerson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(adminScreen.this, registerAssistedPersonScreen.class);
+                Intent i = new Intent(AdminScreen.this, RegisterAssistedPersonScreen.class);
             }
         });
 

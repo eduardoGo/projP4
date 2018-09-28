@@ -1,4 +1,4 @@
-package com.redesaudeal.app.redesaude;
+package com.redesaudeal.app.redesaude.GUI;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,8 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.redesaudeal.app.redesaude.R;
+import com.redesaudeal.app.redesaude.Services.ConnectionDatabase.Connect;
 
 public class MainActivity extends AppCompatActivity {
 
