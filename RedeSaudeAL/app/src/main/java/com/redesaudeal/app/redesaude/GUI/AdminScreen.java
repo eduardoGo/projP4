@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 
+import com.redesaudeal.app.redesaude.R;
+
 public class AdminScreen extends AppCompatActivity {
 
 

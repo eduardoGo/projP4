@@ -9,11 +9,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.redesaudeal.app.redesaude.Domain.Admin;
 import com.redesaudeal.app.redesaude.Domain.Loggable;
 import com.redesaudeal.app.redesaude.R;
-import com.redesaudeal.app.redesaude.Services.ConnectionDatabase.Connection;
-import com.redesaudeal.app.redesaude.Services.CreatorLoggable;
+import com.redesaudeal.app.redesaude.Services.ConnectionDatabase.CreatorFirebaseLoggable;
 
 public class RegisterScreen extends AppCompatActivity {
 
@@ -71,11 +71,17 @@ public class RegisterScreen extends AppCompatActivity {
         int ageAux = Integer.valueOf(ageText.getText().toString());
 
         Loggable admin = new Admin();
+
         admin.setName(nameAux);
         admin.setLogin(emailAux);
         admin.setPassword(passwdAux);
 
         final int age = ageAux;
+
+
+
+
+        /*
 
         Connection con = Connection.getInstance();
         CreatorLoggable creatorLog = con.getCreatorLoggable();
@@ -86,6 +92,29 @@ public class RegisterScreen extends AppCompatActivity {
             startActivity(i);
             finish();
         }
+        */
+
+
+        FirebaseAuth authCurrent = CreatorFirebaseLoggable.createLoggable(admin);
+
+        if(authCurrent.getCurrentUser() != null){
+
+            Intent i = new Intent(RegisterScreen.this, PerfilScreen.class);
+
+            Bundle bundle = new Bundle();
+
+            bundle.putString("uid", authCurrent.getCurrentUser().getUid());
+
+            i.putExtras(bundle);
+
+            startActivity(i);
+
+            finish();
+        }else
+            alert("Erro, tente novamente");
+
+
+
 
     }
 

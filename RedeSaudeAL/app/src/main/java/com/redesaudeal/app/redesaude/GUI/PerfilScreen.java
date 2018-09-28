@@ -1,5 +1,6 @@
 package com.redesaudeal.app.redesaude.GUI;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -15,9 +16,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.redesaudeal.app.redesaude.Domain.Loggable;
 import com.redesaudeal.app.redesaude.R;
 import com.redesaudeal.app.redesaude.Services.ConnectionDatabase.Connect;
-import com.redesaudeal.app.redesaude.Services.ConnectionDatabase.Connection;
-import com.redesaudeal.app.redesaude.Services.ConnectionLoggable;
-import com.redesaudeal.app.redesaude.Services.CreatorLoggable;
 
 public class PerfilScreen extends AppCompatActivity {
 
@@ -26,9 +24,11 @@ public class PerfilScreen extends AppCompatActivity {
     private TextView ageText;
     private Button exit;
     private FirebaseUser userFirebase;
+    private String uidLoggable;
 
-    Connection con;
-    ConnectionLoggable conLog;
+
+    //Connection con;
+    //ConnectionLoggable conLog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +40,16 @@ public class PerfilScreen extends AppCompatActivity {
         emailText = (TextView) findViewById(R.id.emailExb);
         ageText = (TextView) findViewById(R.id.ageExib);
         exit = (Button) findViewById(R.id.signOut);
-        eventoClick();
+        //eventoClick();
         //userFirebase = Connect.getAuth().getCurrentUser();
 
-        con = Connection.getInstance();
-        conLog = con.getConnectionLoggable();
+        //con = Connection.getInstance();
+        //conLog = con.getConnectionLoggable();
+
+        Intent i = getIntent();
+        Bundle bundle = i.getExtras();
+        uidLoggable = bundle.getString("uid");
+
 
         setLoggableFields();
 
@@ -53,22 +58,16 @@ public class PerfilScreen extends AppCompatActivity {
 
     private void setLoggableFields() {
 
-        Loggable log = conLog.getCurrentLoggable();
-        emailText.setText(log.getLogin());
-        nameText.setText(log.getName());
+
+
+        FirebaseUser log = Connect.getFirebaseUser();
+
+        emailText.setText(log.getEmail());
+
+        nameText.setText("Test");
 
     }
 
-
-    protected void eventoClick(){
-        exit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                conLog.signOut();
-                finish();
-            }
-        });
-    }
 
 /*    @Override
     protected void onStart() {

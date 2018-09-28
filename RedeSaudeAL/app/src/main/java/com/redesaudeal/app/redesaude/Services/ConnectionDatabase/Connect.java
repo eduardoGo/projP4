@@ -6,57 +6,62 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.redesaudeal.app.redesaude.Services.ConnectionLoggable;
 
 public class Connect {
 
-    private static FirebaseAuth auth;
     private static FirebaseAuth.AuthStateListener authStateListener;
     private static FirebaseUser firebaseUser;
     private static DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("Database");
-    private static DatabaseReference users = database.child("Users");
-    private static DatabaseReference families = users.child("Families");
+    private static DatabaseReference users = database.child("Loggable");
 
-    public static ConnectionLoggable getConnectionLoggable(){
-        return ConnectionFirebaseLoggable.getInstance();
-    }
+
 
     public Connect(){
 
     }
 
-    public static FirebaseAuth getAuth() {
-        if(auth == null){
-            inicializarFirebase();
+    public FirebaseAuth getNewAuth() {
 
-        }
+        FirebaseAuth auth = null;
+        inicializarFirebase(auth);
+
         return auth;
     }
 
-    private static void inicializarFirebase(){
+    private void inicializarFirebase(FirebaseAuth auth){
+
         auth = FirebaseAuth.getInstance();
+
+        final FirebaseAuth finalAuth = auth;
+
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = auth.getCurrentUser();
+                FirebaseUser user = finalAuth.getCurrentUser();
                 if(user != null){
                     firebaseUser = user;
                 }
             }
         };
+
         auth.addAuthStateListener(authStateListener);
 
     }
 
+
     public static FirebaseUser getFirebaseUser() {
+
         return firebaseUser;
     }
-    public static void logOut(){
+
+    public static void logOut(FirebaseAuth auth){
+
         auth.signOut();
     }
 
-
     public static DatabaseReference getUsers() {
+
         return users;
     }
+
 }
