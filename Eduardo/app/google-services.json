@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "699988981846",
+    "firebase_url": "https://itodo-c830d.firebaseio.com",
+    "project_id": "itodo-c830d",
+    "storage_bucket": "itodo-c830d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:699988981846:android:e4e025e0f7dcfa26",
+        "android_client_info": {
+          "package_name": "com.itodo.app.itodo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "699988981846-lkr706je8r45e5rdnbjvuttlh0594cpl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itodo.app.itodo",
+            "certificate_hash": "c8a3a7f4eb2615b3b2a039493c822049fa35e6ee"
+          }
+        },
+        {
+          "client_id": "699988981846-d45dajr8c34mtl3pr3mth46upce2l64i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKQNAwPF8QCNjjBdd_K4Q8oSUhDJgYEJA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "699988981846-d45dajr8c34mtl3pr3mth46upce2l64i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
