@@ -1,11 +1,16 @@
 package com.itodo.app.itodo.Domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Project {
+public class Project implements Serializable{
     private String id;
     private String name;
-    private ArrayList<String> tasks;
+    private ArrayList<Task> tasks;
+
+    public Project(){
+        this.tasks = new ArrayList<>();
+    }
 
     public Project(String id){
         this.id = id;
@@ -27,7 +32,7 @@ public class Project {
         this.name = name;
     }
 
-    public void addTask(String task){
+    public void addTask(Task task){
         this.tasks.add(task);
     }
 
@@ -35,11 +40,11 @@ public class Project {
         this.tasks.remove(index);
     }
 
-    public ArrayList<String> getTasks() {
+    public ArrayList<Task> getTasks() {
         return tasks;
     }
 
-    public void setTasks(ArrayList<String> tasks) {
+    public void setTasks(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 

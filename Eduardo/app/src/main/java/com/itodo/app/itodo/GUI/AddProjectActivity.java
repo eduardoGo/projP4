@@ -1,6 +1,5 @@
 package com.itodo.app.itodo.GUI;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -30,6 +28,8 @@ public class AddProjectActivity extends AppCompatActivity {
     private LinearLayout loginCowkLinear;
     private ArrayList<EditText> listEditCoWk;
     private User currentUser;
+
+    private  User user;
 
     private String loginCW;
 
@@ -62,7 +62,7 @@ public class AddProjectActivity extends AppCompatActivity {
         okBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Project newProject = new Project(currentUser.getLogin()+currentUser.getProjectsAmount());
+                final Project newProject = new Project(currentUser.getLogin()+currentUser.countIdProjects());
                 newProject.setName(editName.getText().toString());
 
                 Connect.getNodeProject().child(newProject.getId()).setValue(newProject);
@@ -71,15 +71,15 @@ public class AddProjectActivity extends AppCompatActivity {
 
                     loginCW = editLogin.getText().toString();
 
-                    if(!loginCW.equals("")) {
+                    if(loginCW.equals("ed1")) {
                         DatabaseReference node = Connect.getNodeUser().child(loginCW);
-                        node.addValueEventListener(new ValueEventListener() {
+                        node.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 User user = dataSnapshot.getValue(User.class);
                                 if (user != null) {
                                     user.addIdProject(newProject.getId());
-                                    alert(String.valueOf(user.getIdProjects().size()));
+                                    alert(""+user.getIdProjects().size());
                                     Connect.getNodeUser().child(user.getLogin()).child("idProjects").setValue(user.getIdProjects());//O problema pode ser adicionar no nó idProjects
                                 } else {
                                     alert(loginCW + " inexistente");

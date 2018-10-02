@@ -18,7 +18,9 @@
         </activity>
         <activity android:name=".GUI.RegisterActivity" />
         <activity android:name=".GUI.PerfilActivity" />
-        <activity android:name=".GUI.AddProjectActivity"></activity>
+        <activity android:name=".GUI.AddProjectActivity" />
+        <activity android:name=".GUI.TasksActivity" />
+        <activity android:name=".GUI.AddTaskActivity"></activity>
     </application>
 
 </manifest>

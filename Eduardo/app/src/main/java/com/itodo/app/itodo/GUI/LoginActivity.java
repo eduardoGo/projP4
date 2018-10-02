@@ -101,7 +101,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
                 if(user != null){
-                    alert(user.getLogin());
                     user.setLogin(login);
 
                     Intent it = new Intent(getApplicationContext(), PerfilActivity.class);

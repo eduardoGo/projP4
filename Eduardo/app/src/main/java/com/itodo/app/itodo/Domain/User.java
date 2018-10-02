@@ -26,6 +26,9 @@ public class User implements Serializable {
     public void addProject(Project project){
         projects.add(project);
     }
+    public void removeIdProject(String id){
+        idProjects.remove(id);
+    }
 
     public void addIdProject(String idProject){
         idProjects.add(idProject);
@@ -81,9 +84,40 @@ public class User implements Serializable {
         this.idProjects = idProjects;
     }
 
-    public int getProjectsAmount(){
+    public int countProjects(){
         if(this.projects == null) return 0;
         return this.projects.size();
+    }
+
+    public int countIdProjects(){
+        if(this.idProjects == null) return 0;
+        return this.idProjects.size();
+    }
+
+    public boolean checkConsistenceIdProjects() {
+
+        if(countProjects() == countIdProjects()) return true;
+
+        String idProject;
+        int index = 0;
+        while(countProjects() < countIdProjects()){
+            idProject = idProjects.get(index);
+
+            boolean exist = false;
+            for(int i = 0; i < countProjects(); i++){
+                if(projects.get(i).getId().equals(idProject)){
+                    exist = true;
+                    break;
+                }
+            }
+
+            if(!exist) idProjects.remove(index);
+
+            else index++;
+        }
+
+        return false;
+
     }
 
 }
