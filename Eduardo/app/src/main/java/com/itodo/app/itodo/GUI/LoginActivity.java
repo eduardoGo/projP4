@@ -38,22 +38,17 @@ public class LoginActivity extends AppCompatActivity {
 
         //Get UI elements
 
-        defineUIElements();
+        setViews();
 
         defineOnClickListeners();
 
     }
 
-    protected void defineUIElements(){
+    protected void setViews(){
         mButtonLogin = (Button) findViewById(R.id.enter);
         mButtonRegister = (Button) findViewById(R.id.register);
         mEmail = (EditText) findViewById(R.id.login);
         mPasswd = (EditText) findViewById(R.id.passwd);
-    }
-
-    protected void onStart(){
-        super.onStart();
-
     }
 
     private void defineOnClickListeners(){
@@ -95,7 +90,6 @@ public class LoginActivity extends AppCompatActivity {
     private void nextScreen() {
 
         DatabaseReference node = Connect.getNodeUser().child(login);
-        alert(Connect.getCurrentUserLogin());
         node.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

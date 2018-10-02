@@ -8,7 +8,7 @@ public class Task implements Serializable {
     private String idProject;
 
     public Task(){
-
+        idProject = "";
     }
 
     public Task(String name){

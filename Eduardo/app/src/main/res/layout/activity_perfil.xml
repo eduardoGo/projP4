@@ -8,6 +8,15 @@
     android:orientation="vertical"
     tools:context=".GUI.PerfilActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Vamos trabalhar, User?!"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
+        android:id="@+id/welcome"/>
 
     <Button
         style="@style/buttonStyle"

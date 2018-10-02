@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -27,7 +28,9 @@ public class PerfilActivity extends AppCompatActivity {
     private ListView listViewProj;
     private Button addProjBt;
     private User currentUser;
-    private String id;
+    private int numProjectsOnListining;
+    private TextView welcomeText;
+    ProjectAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,17 +38,65 @@ public class PerfilActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_perfil);
 
+        numProjectsOnListining = 0;
         currentUser = (User) getIntent().getSerializableExtra("user");
         ArrayList<String> idProjects = currentUser.getIdProjects();
-        if(idProjects != null){
-            searchProjects();
-        }
 
+        addListenerOnUser();
         setViews();
 
     }
 
-    private void searchProjects() {
+    private void addListenerOnUser() {
+
+        DatabaseReference node = Connect.getNodeUser().child(currentUser.getLogin());
+        node.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                if (user != null) {
+                    currentUser.getIdProjects().clear();
+                    currentUser.getIdProjects().addAll(user.getIdProjects());
+                    addListenerOnProjects();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                return;
+            }
+        });
+
+    }
+
+    private void addListenerOnProjects() {
+
+        for(int i = numProjectsOnListining; i < currentUser.countIdProjects(); i++){
+
+            String id = currentUser.getIdProjects().get(i);
+            DatabaseReference node = Connect.getNodeProject().child(id);
+            node.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Project project = dataSnapshot.getValue(Project.class);
+                    if (project != null) {
+                        currentUser.addProject(project);
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    return;
+                }
+            });
+
+        }
+        numProjectsOnListining = currentUser.countIdProjects();
+
+    }
+
+/*    private void searchProjects() {
 
         for(String id : currentUser.getIdProjects()) {
 
@@ -67,10 +118,11 @@ public class PerfilActivity extends AppCompatActivity {
         }
 
     }
-
-
-
+*/
     private void setViews(){
+
+        welcomeText = (TextView) findViewById(R.id.welcome);
+        welcomeText.setText("Vamos trabalhar, "+currentUser.getName()+"?!");
         listViewProj = (ListView) findViewById(R.id.projects);
 
         setListView();
@@ -84,15 +136,13 @@ public class PerfilActivity extends AppCompatActivity {
                 Intent it = new Intent(getApplicationContext(), AddProjectActivity.class);
                 it.putExtra("user", currentUser);
                 startActivity(it);
-
-                if(currentUser.getIdProjects() != null) searchProjects();
             }
         });
     }
 
     private void setListView() {
 
-        ProjectAdapter adapter = new ProjectAdapter(this, currentUser.getProjects());
+        adapter = new ProjectAdapter(this, currentUser.getProjects());
         listViewProj.setAdapter(adapter);
 
         listViewProj.setOnItemClickListener(new AdapterView.OnItemClickListener() {

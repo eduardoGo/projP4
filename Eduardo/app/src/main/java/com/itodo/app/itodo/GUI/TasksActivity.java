@@ -35,10 +35,9 @@ public class TasksActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_tasks);
-
         project = (Project) getIntent().getSerializableExtra("project");
-
         setViews();
+        updateTasks();
 
     }
 
@@ -56,6 +55,8 @@ public class TasksActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                alert("Projeto excluído");
+                finish();
                 return;
             }
         });
@@ -76,7 +77,6 @@ public class TasksActivity extends AppCompatActivity {
                 it.putExtra("num_tasks", project.getTasks().size());
                 it.putExtra("id_project", project.getId());
                 startActivity(it);
-                updateTasks();
             }
         });
     }

@@ -19,6 +19,9 @@ public class User implements Serializable {
     }
 
     public User() {
+        this.name = "";
+        this.login = "";
+        this.password = "";
         this.idProjects = new ArrayList<>();
         this.projects = new ArrayList<>();
     }
@@ -94,7 +97,7 @@ public class User implements Serializable {
         return this.idProjects.size();
     }
 
-    public boolean checkConsistenceIdProjects() {
+/*    public boolean checkConsistenceIdProjects() {
 
         if(countProjects() == countIdProjects()) return true;
 
@@ -119,5 +122,5 @@ public class User implements Serializable {
         return false;
 
     }
-
+*/
 }
